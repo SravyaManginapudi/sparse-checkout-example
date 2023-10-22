@@ -11,7 +11,7 @@ jobs:
           ref: ${{ github.event.before }}
           path: repo
       - name: Sparse-Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: repo
           fetch-depth: 1

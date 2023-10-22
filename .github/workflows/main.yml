@@ -21,7 +21,6 @@ jobs:
             web/browser
       - name: Count Files
         run: |
-          cd repo
           file_count=$(find . -type f | wc -l)
           echo "Number of files: $file_count"
         working-directory: repo

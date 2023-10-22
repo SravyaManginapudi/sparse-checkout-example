@@ -1,0 +1,28 @@
+name: Test Sparse-Checkout Action
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code with Sparse-Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.before }}
+          path: repo
+      - name: Sparse-Checkout
+        uses: actions/checkout@v2
+        with:
+          path: repo
+          fetch-depth: 1
+          ref: ${{ github.sha }}
+          sparse-checkout: |
+            service
+            web/browser
+      - name: Count Files
+        run: |
+          cd repo
+          file_count=$(find . -type f | wc -l)
+          echo "Number of files: $file_count"
+        working-directory: repo
+
